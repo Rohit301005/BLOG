@@ -32,7 +32,7 @@ def home(request):
                 <p>{post['content']}</p>
             </div>
 """
-    return HttpResponse(html)
+    return render(request, 'posts/home.html', {'posts': posts})
 
 def post(request,id):
     valid_id = False
@@ -46,10 +46,14 @@ def post(request,id):
                 <h1>{post_dict['title']}</h1>
                 <p>{post_dict['content']}</p>
             """
-        return HttpResponse(html)
+        return render(request, 'posts/post.html', {'post_dict': post_dict})
     else:
         return HttpResponseNotFound("Post not found")
 
 def google(request,id):
     url = reverse("post",args=[id])
     return HttpResponseRedirect(url)
+
+
+
+    return render(request, 'global.html')
