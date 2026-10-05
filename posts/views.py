@@ -32,7 +32,7 @@ def home(request):
                 <p>{post['content']}</p>
             </div>
 """
-    return render(request, 'posts/home.html', {'posts': posts})
+    return render(request, 'posts/index.html', {'posts': posts})
 
 def post(request,id):
     valid_id = False
@@ -50,10 +50,7 @@ def post(request,id):
     else:
         return HttpResponseNotFound("Post not found")
 
-def google(request,id):
-    url = reverse("post",args=[id])
-    return HttpResponseRedirect(url)
 
 
 
-    return render(request, 'global.html')
+
