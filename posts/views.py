@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse,HttpResponseNotFound,HttpResponseRedirect
+from django.http import HttpResponse,HttpResponseNotFound,HttpResponseRedirect,Http404
 from django.urls import reverse
 posts = [
     {
@@ -20,6 +20,8 @@ posts = [
         "content": "JavaScript is a versatile, high-level programming language that is primarily used",
     },
 ]
+
+
 
 def home(request):
     html = ""
@@ -48,7 +50,7 @@ def post(request,id):
             """
         return render(request, 'posts/post.html', {'post_dict': post_dict})
     else:
-        return HttpResponseNotFound("Post not found")
+        raise Http404()
 
 
 
