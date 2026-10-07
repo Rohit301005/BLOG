@@ -24,3 +24,6 @@ urlpatterns = [
   
     
 ]
+
+admin.site.site_header = "My Blog"
+admin.site.index_title = "My Blog"
