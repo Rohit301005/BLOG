@@ -9,7 +9,6 @@ from django.shortcuts import get_object_or_404
 
 def home(request):
     all_posts = Post.objects.all()
-
     return render(request, 'posts/index.html', {'posts': all_posts})
 
 def post(request,id):
