@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse,HttpResponseNotFound,HttpResponseRedirect,Http404
 from django.urls import reverse
-from .models import Post
+from .models import Post,Tags
 from django.shortcuts import get_object_or_404
 from django.core.paginator import Paginator
 from .forms import CommentForm
@@ -23,12 +23,18 @@ def post(request,id):
         if form.is_valid():
             comment = form.save(commit=False)
             comment.post = post
+            comment.user = request.user
             comment.save()
             posturl = reverse('post',args=[id])
             return HttpResponseRedirect(posturl)
     
     form = CommentForm()
-    return render(request, 'posts/post.html', {'post_dict': post, 'form': form})
+    return render(request, 'posts/post.html', {'post_dict': post, 'form': form,'comment':post.comment_set.all()})
+
+
+def Tag(request,id):
+    tag = Tags.objects.get(id=id)
+    return render(request, 'posts/tags.html',{'tags' : tag.post_set.all()})
     
 
 
