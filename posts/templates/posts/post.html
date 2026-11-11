@@ -20,9 +20,10 @@
                 <p>{{post_dict.post_content}}</p>    
             </div>
             <h2>Comments</h2>
-            <form method='POST'>
-                <textarea name="" class="form-control" id=""></textarea>
-                <button type='submit' class='btn btn-primary'>Comment</button>
+            <form method='POST' action="">
+                {% csrf_token %}
+                {{ form }}
+                <button type="submit" class="btn btn-primary">Comment</button>
             </form>
             <h2 class='bg-danger'>Login To Comment</h2>
           
