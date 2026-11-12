@@ -132,3 +132,13 @@ MAILERS = {
         'BACKEND': 'django.core.mail.backends.console.EmailBackend',
     },
 }
+
+
+# BUILT IN AUTH VIEWS SETTING
+LOGIN_REDIRECT_URL = '/post/home/'
+
+LOGOUT_REDIRECT_URL = '/accounts/login/'
+
+# MEDIA SETTING
+MEDIA_ROOT = BASE_DIR /'media'
+MEDIA_URL = '/media/'

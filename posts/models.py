@@ -12,7 +12,7 @@ class Post(models.Model):
     post_content = models.TextField()
     published_date = models.DateField(auto_now = True)
     tags = models.ManyToManyField(Tags)
-
+    post_image = models.ImageField(upload_to='post',default='post/1.png')
     def __str__(self):
         return self.post_title
     
