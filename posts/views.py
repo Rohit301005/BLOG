@@ -5,16 +5,17 @@ from .models import Post,Tags
 from django.shortcuts import get_object_or_404
 from django.core.paginator import Paginator
 from .forms import CommentForm
+from django.db.models import Q
 
 
 
 
 def home(request):
     all_posts = Post.objects.all().order_by('-id')
-    paginator = Paginator(all_posts,2,allow_empty_first_page=True)
+    paginator = Paginator(all_posts,4,allow_empty_first_page=True)
     page_number = request.GET.get('p',1)
     page_obj = paginator.get_page(page_number)
-    return render(request, 'posts/index.html', {'posts': page_obj})
+    return render(request, 'posts/index.html', {'posts': page_obj,'total':all_posts.count()})
 
 def post(request,id):
     post = get_object_or_404(Post, id = id)
@@ -38,5 +39,8 @@ def Tag(request,id):
     
 def search(request):
     query = request.GET.get('query', None)
-    posts = Post.objects.filter(post_title=query)
-    return render(request,'posts/search.html')
+    page_number = request.GET.get('p',1)
+    posts = Post.objects.filter(Q(post_title__icontains=query) | Q(post_content__icontains=query)).order_by('-id')
+    paginator = Paginator(posts,4)
+    page_obj = paginator.get_page(page_number)
+    return render(request,'posts/search.html',{'posts':page_obj,'query':query,'total':posts.count()})

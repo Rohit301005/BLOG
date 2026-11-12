@@ -135,7 +135,7 @@ MAILERS = {
 
 
 # BUILT IN AUTH VIEWS SETTING
-LOGIN_REDIRECT_URL = '/post/home/'
+LOGIN_REDIRECT_URL = '/'
 
 LOGOUT_REDIRECT_URL = '/accounts/login/'
 
